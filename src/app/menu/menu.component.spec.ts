@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DishdetailComponent } from '../dishdetail/dishdetail.component';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -12,7 +13,8 @@ describe('MenuComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        MenuComponent
+        MenuComponent,
+        DishdetailComponent
       ],
       imports: [
         BrowserModule,
