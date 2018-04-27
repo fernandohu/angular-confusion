@@ -4,14 +4,16 @@ import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule} from './material.module';
 import { FlexLayoutModule} from '@angular/flex-layout';
-import {MenuComponent} from "./menu/menu.component";
+import { MenuComponent } from './menu/menu.component';
+import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        MenuComponent
+        MenuComponent,
+        DishdetailComponent
       ],
       imports: [
         BrowserModule,
