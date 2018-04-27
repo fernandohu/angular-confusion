@@ -9,6 +9,9 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { DishService } from './services/dish.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { APP_BASE_HREF } from "@angular/common";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,16 +21,22 @@ describe('AppComponent', () => {
         MenuComponent,
         DishdetailComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        HomeComponent
       ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
         MaterialModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        AppRoutingModule
       ],
       providers: [
-        DishService
+        DishService,
+        {
+          provide: APP_BASE_HREF,
+          useValue: '/'
+        }
       ]
     }).compileComponents();
   }));
