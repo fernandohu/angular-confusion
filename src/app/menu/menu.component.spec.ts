@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DishdetailComponent } from '../dishdetail/dishdetail.component';
+import { DishService } from '../services/dish.service';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -21,6 +22,9 @@ describe('MenuComponent', () => {
         BrowserAnimationsModule,
         MaterialModule,
         FlexLayoutModule
+      ],
+      providers: [
+        DishService
       ]
     }).compileComponents();
   }));

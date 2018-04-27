@@ -6,6 +6,7 @@ import { MaterialModule} from './material.module';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import { DishService } from './services/dish.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,6 +21,9 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
         MaterialModule,
         FlexLayoutModule
+      ],
+      providers: [
+        DishService
       ]
     }).compileComponents();
   }));
