@@ -12,8 +12,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 class MockActivatedRoute extends ActivatedRoute {
   constructor() {
-    super(null, null, null, null, null);
-    this.params = Observable.of({id: "5"});
+    super();
+    this.params = Observable.of({id: "1"});
   }
 }
 
