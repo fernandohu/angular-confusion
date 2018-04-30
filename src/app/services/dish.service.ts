@@ -7,19 +7,19 @@ export class DishService {
 
   constructor() { }
 
-  getDishes(): Dish[] {
-    return DISHES;
+  getDishes(): Promise<Dish[]> {
+    return Promise.resolve(DISHES);
   }
 
-  getDish(id: number): Dish {
-    return DISHES.filter(dish => {
+  getDish(id: number): Promise<Dish> {
+    return Promise.resolve(DISHES.filter(dish => {
       return dish.id == id
-    })[0];
+    })[0]);
   }
 
-  getFeaturedDish(): Dish {
-    return DISHES.filter(dish => {
+  getFeaturedDish(): Promise<Dish> {
+    return Promise.resolve(DISHES.filter(dish => {
       return dish.featured
-    })[0];
+    })[0]);
   }
 }
