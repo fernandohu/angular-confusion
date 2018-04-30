@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { APP_BASE_HREF } from "@angular/common";
 import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -24,7 +25,8 @@ describe('AppComponent', () => {
         HeaderComponent,
         FooterComponent,
         HomeComponent,
-        ContactComponent
+        ContactComponent,
+        AboutComponent
       ],
       imports: [
         BrowserModule,

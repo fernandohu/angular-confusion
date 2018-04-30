@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { MaterialModule } from '../material.module';
 import { PromotionService } from '../services/promotion.service';
 import { DishService } from '../services/dish.service';
+import {LeaderService} from "../services/leader.service";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,7 +14,7 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
       imports: [ MaterialModule ],
-      providers: [ DishService, PromotionService ]
+      providers: [ DishService, PromotionService, LeaderService ]
     })
     .compileComponents();
   }));

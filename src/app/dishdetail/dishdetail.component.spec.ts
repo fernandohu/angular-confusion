@@ -4,6 +4,18 @@ import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DishService } from '../services/dish.service';
+import {ActivatedRoute, RouterModule} from '@angular/router';
+import { Observable } from 'rxjs';
+import {Location, LocationStrategy, APP_BASE_HREF, PathLocationStrategy} from '@angular/common';
+import {RouterTestingModule} from "@angular/router/testing";
+
+class MockActivatedRoute extends ActivatedRoute {
+  constructor() {
+    super(null, null, null, null, null);
+    this.params = Observable.of({id: "5"});
+  }
+}
 
 describe('DishdetailComponent', () => {
   let component: DishdetailComponent;
@@ -18,7 +30,24 @@ describe('DishdetailComponent', () => {
         BrowserModule,
         BrowserAnimationsModule,
         MaterialModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        RouterTestingModule
+      ],
+      providers: [
+        DishService,
+        Location,
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
+        {
+          provide: APP_BASE_HREF,
+          useValue: '/'
+        },
+        {
+          provide: ActivatedRoute,
+          useClass: MockActivatedRoute,
+          useValue: {
+            params: Observable.of({id: 123})
+          }
+        }
       ]
     }).compileComponents();
   }));
