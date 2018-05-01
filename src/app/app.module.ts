@@ -18,7 +18,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { baseURL } from './shared/baseurl';
+import { ProcessHttpmsgService } from './services/process-httpmsg.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -40,12 +43,18 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    ProcessHttpmsgService,
+    {
+      provide: 'baseURL',
+      useValue: baseURL
+    }
   ],
   entryComponents: [
     LoginComponent
