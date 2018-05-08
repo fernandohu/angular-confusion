@@ -42,6 +42,8 @@ export class DishdetailComponent implements OnInit {
     }
   };
 
+  errMsg: string;
+
   constructor(private dishService: DishService,
               private route: ActivatedRoute,
               private location: Location,
@@ -50,7 +52,10 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
     this.dishService.getDishIds()
-      .subscribe(dishIds => this.dishIds = dishIds);
+      .subscribe(
+        dishIds => this.dishIds = dishIds,
+        err => this.errMsg = <any>err
+      );
 
     this.route.params
       .switchMap((params: Params) => this.dishService.getDish(+params['id']))
@@ -99,7 +104,7 @@ export class DishdetailComponent implements OnInit {
   }
 
   onSubmit() {
-    let comment = this.commentForm.value;
+    const comment = this.commentForm.value;
 
     comment.date = new Date().toISOString();
     this.dish.comments.push(comment);
@@ -112,7 +117,7 @@ export class DishdetailComponent implements OnInit {
   }
 
   setPrevNext(dishId: number) {
-    let index = this.dishIds.indexOf(dishId);
+    const index = this.dishIds.indexOf(dishId);
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.prev = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
