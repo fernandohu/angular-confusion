@@ -44,6 +44,8 @@ export class DishdetailComponent implements OnInit {
 
   errMsg: string;
 
+  dishcopy = null;
+
   constructor(private dishService: DishService,
               private route: ActivatedRoute,
               private location: Location,
@@ -62,6 +64,7 @@ export class DishdetailComponent implements OnInit {
       .subscribe(
         dish => {
           this.dish = dish;
+          this.dishcopy = dish;
           this.setPrevNext(dish.id);
         },
         err => this.errMsg = err
@@ -113,7 +116,14 @@ export class DishdetailComponent implements OnInit {
     const comment = this.commentForm.value;
 
     comment.date = new Date().toISOString();
-    this.dish.comments.push(comment);
+
+    this.dishcopy.comments.push(comment);
+    this.dishcopy.save().subscribe(
+      dish => {
+        this.dish = dish;
+        console.log(this.dish);
+      }
+    );
 
     this.commentForm.reset({
       author: '',
