@@ -59,7 +59,13 @@ export class DishdetailComponent implements OnInit {
 
     this.route.params
       .switchMap((params: Params) => this.dishService.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id) });
+      .subscribe(
+        dish => {
+          this.dish = dish;
+          this.setPrevNext(dish.id);
+        },
+        err => this.errMsg = err
+      );
 
     this.createForm();
   }
