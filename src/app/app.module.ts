@@ -25,6 +25,7 @@ import { HttpModule } from '@angular/http';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { RestangularConfigFactory } from './shared/restConfig';
 import { HighlightDirective } from './directives/highlight.directive';
+import { FeedbackService } from './services/feedback.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     {
       provide: 'baseURL',
       useValue: baseURL
-    }
+    },
+    FeedbackService
   ],
   entryComponents: [
     LoginComponent
