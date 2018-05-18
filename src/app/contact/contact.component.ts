@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 import { FeedbackService } from '../services/feedback.service';
 
 @Component({
@@ -13,7 +13,9 @@ import { FeedbackService } from '../services/feedback.service';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    visibility(),
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
@@ -56,6 +58,10 @@ export class ContactComponent implements OnInit {
     this.createForm();
   }
 
+  formVisibility = 'shown';
+
+  result: Feedback = null;
+
   createForm() {
     this.feedbackForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
@@ -92,9 +98,28 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.formVisibility = 'hidden';
     this.feedback = this.feedbackForm.value;
 
-    this.feedbackService.submitFeedback(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback).subscribe(
+      feedback => {
+        this.formVisibility = 'shown';
+        this.result = feedback;
+
+        setTimeout(() => {
+          this.formVisibility = 'hidden';
+
+          setTimeout(() => {
+            this.result = null;
+            this.formVisibility = 'shown';
+          }, 500);
+
+        }, 5000);
+      },
+      err => {
+
+      }
+    );
 
     this.feedbackForm.reset({
       firstname: '',

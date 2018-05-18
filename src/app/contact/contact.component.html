@@ -39,61 +39,79 @@
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
 
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-      <p>
-        <mat-input-container class="half-width" dividerColor="{{formErrors.firstname ? 'warn' : 'primary'}}">
-          <input matInput formControlName="firstname" placeholder="First Name" type="text" required />
+    <div [hidden]="formVisibility == 'shown' || result != null">
+      <mat-spinner></mat-spinner><h4>Loading... Please wait</h4>
+    </div>
+    
+    <div [@visibility]="formVisibility" [@expand]>
 
-          <mat-hint>
-            <span [hidden]="!formErrors.firstname">{{formErrors.firstname}}</span>
-          </mat-hint>
-        </mat-input-container>
+      <div *ngIf="result">
+        <h3>Your submission</h3>
+        <p>First name: {{result.firstname}}</p>
+        <p>Last name: {{result.lastname}}</p>
+        <p>Tel. Number: {{result.telnum}}</p>
+        <p>E-mail: {{result.email}}</p>
+        <p>Contact You?: {{result.agree}}</p>
+        <p>How?: {{result.contacttype}}</p>
+        <p>Feedback: {{result.message}}</p>
+      </div>
 
-        <mat-input-container class="half-width" dividerColor="{{formErrors.lastname ? 'warn' : 'primary'}}">
-          <input matInput formControlName="lastname" placeholder="Last Name" type="text" required />
+      <form *ngIf="!result" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-input-container class="half-width" dividerColor="{{formErrors.firstname ? 'warn' : 'primary'}}">
+            <input matInput formControlName="firstname" placeholder="First Name" type="text" required />
 
-          <mat-hint>
-            <span [hidden]="!formErrors.lastname">{{formErrors.lastname}}</span>
-          </mat-hint>
-        </mat-input-container>
+            <mat-hint>
+              <span [hidden]="!formErrors.firstname">{{formErrors.firstname}}</span>
+            </mat-hint>
+          </mat-input-container>
 
-        <mat-input-container class="half-width" class="half-width" dividerColor="{{formErrors.telnum ? 'warn' : 'primary'}}">
-          <input matInput formControlName="telnum" placeholder="Tel. Numbeer" type="tel" pattern="[0-9]*" required />
+          <mat-input-container class="half-width" dividerColor="{{formErrors.lastname ? 'warn' : 'primary'}}">
+            <input matInput formControlName="lastname" placeholder="Last Name" type="text" required />
 
-          <mat-hint>
-            <span [hidden]="!formErrors.telnum">{{formErrors.telnum}}</span>
-          </mat-hint>
-        </mat-input-container>
+            <mat-hint>
+              <span [hidden]="!formErrors.lastname">{{formErrors.lastname}}</span>
+            </mat-hint>
+          </mat-input-container>
 
-        <mat-input-container class="half-width" class="half-width" dividerColor="{{formErrors.email ? 'warn' : 'primary'}}">
-          <input matInput formControlName="email" placeholder="E-mail" type="email" email required />
+          <mat-input-container class="half-width" class="half-width" dividerColor="{{formErrors.telnum ? 'warn' : 'primary'}}">
+            <input matInput formControlName="telnum" placeholder="Tel. Numbeer" type="tel" pattern="[0-9]*" required />
 
-          <mat-hint>
-            <span [hidden]="!formErrors.email">{{formErrors.email}}</span>
-          </mat-hint>
-        </mat-input-container>
-      </p>
+            <mat-hint>
+              <span [hidden]="!formErrors.telnum">{{formErrors.telnum}}</span>
+            </mat-hint>
+          </mat-input-container>
 
-      <table class="form-size">
-        <td>
-          <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
-        </td>
-        <td>
-          <mat-select placeholder="How?" formControlName="contacttype">
-            <mat-option *ngFor="let ctype of contactType" [value]="ctype">
-              {{ ctype }}
-            </mat-option>
-          </mat-select>
-        </td>
-      </table>
+          <mat-input-container class="half-width" class="half-width" dividerColor="{{formErrors.email ? 'warn' : 'primary'}}">
+            <input matInput formControlName="email" placeholder="E-mail" type="email" email required />
 
-      <p>
-        <mat-input-container class="full-width">
-          <textarea matInput formControlName="message" placeholder="Your Feedback" rows="12"></textarea>
-        </mat-input-container>
-      </p>
+            <mat-hint>
+              <span [hidden]="!formErrors.email">{{formErrors.email}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
 
-      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
-    </form>
+        <table class="form-size">
+          <td>
+            <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+          </td>
+          <td>
+            <mat-select placeholder="How?" formControlName="contacttype">
+              <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+                {{ ctype }}
+              </mat-option>
+            </mat-select>
+          </td>
+        </table>
+
+        <p>
+          <mat-input-container class="full-width">
+            <textarea matInput formControlName="message" placeholder="Your Feedback" rows="12"></textarea>
+          </mat-input-container>
+        </p>
+
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
